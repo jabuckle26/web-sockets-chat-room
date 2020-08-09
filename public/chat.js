@@ -9,6 +9,7 @@ let message = document.getElementById('message');
 let username = document.getElementById('username');
 let btn = document.getElementById('send');
 let output = document.getElementById('output');
+let feeback = document.getElementById('feedback');
 
 //Emit events to server
 btn.addEventListener('click', () => {
@@ -16,10 +17,20 @@ btn.addEventListener('click', () => {
     socket.emit('chat', {
         username: username.value,
         message: message.value,
-    })
+    });
+    message.value = '';
 });
+
+message.addEventListener('keypress', () => {
+    socket.emit('typing', username.value);
+})
 
 //Listen for events from server
 socket.on('chat', (dataFromServer) => {
+    feedback.innerHTML = '';
     output.innerHTML += `<p><strong>${dataFromServer.username}</strong>: ${dataFromServer.message}</p>`
-})
+});
+
+socket.on('typing', (dataFromServer) => {
+    feedback.innerHTML = `<p>${dataFromServer} is typing...</p>`
+});

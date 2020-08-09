@@ -24,4 +24,10 @@ io.on('connection', (theSocket) => {
         //Update all sockets connected to the server
         io.sockets.emit('chat', dataFromClient);
     });
+
+    //Listen out for the typing event from client
+    theSocket.on('typing', (dataFromClient) => {
+        //broadcast event from original socket to others
+        theSocket.broadcast.emit('typing', dataFromClient);
+    })
 })
