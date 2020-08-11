@@ -25,6 +25,12 @@ io.on('connection', (theSocket) => {
         io.sockets.emit('chat', dataFromClient);
     });
 
+    theSocket.on('sendMessage', (dataFromClient) => {
+        console.log(dataFromClient);
+        io.sockets.emit('messageFromServer', dataFromClient);
+
+    })
+
     //Listen out for the typing event from client
     theSocket.on('typing', (dataFromClient) => {
         //broadcast event from original socket to others
