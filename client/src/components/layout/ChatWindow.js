@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import io from 'socket.io-client';
 
 const socket = io.connect('http://localhost:4000');
@@ -22,21 +22,21 @@ export const ChatWindow = () => {
         socket.on("messageFromServer", (data) => {
             console.log('Got something');
             console.log(data);
-          setChatOutput([...chatOutput, data]);
+            setChatOutput([...chatOutput, data]);
         });
-      });
+    });
 
     return (
-        <div id="chat-container">
-            <div id="chat-window">
-            <div id="output">{chatOutput.map((message) => (
-                <li key={message}>{message}</li>
-            ))}</div>
-                <div id="feedback"></div>
+        <div className="chatWindow">
+            <div className="chatContainer">
+                <div className="chatTextOutput">{chatOutput.map((message) => (
+                    <p className="message" key={message}>{message}</p>
+                ))}</div>
+                <div className="typingFeedback"></div>
             </div>
-            <div id="input-control">
-                <input id="message" value={messageText} type="text" onChange={(e) => handleTyping(e)} placeholder="Enter message..." />
-                <button id="send" onClick={handleSend}>Send</button>
+            <div className="chatInputContainer">
+                <textarea className="messageInput" value={messageText} type="textArea" onChange={(e) => handleTyping(e)} placeholder="Enter message..." />
+                <button className="sendButton" onClick={handleSend}>Send</button>
             </div>
         </div>
     )

@@ -4,14 +4,14 @@ import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import './App.css';
+import './App.scss';
 import { ChatRoom } from './components/layout/ChatRoom';
 
 const App = () => (
   <Router>
     <Fragment>
-      {/* <Navbar />
-      <Route exact path="/" component={Landing} />
+      <Navbar />
+      {/* <Route exact path="/" component={Landing} />
       <section className="container">
         <Switch>
           <Route exact path='/register' component={Register} />

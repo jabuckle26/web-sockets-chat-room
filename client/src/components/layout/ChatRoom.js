@@ -1,8 +1,12 @@
 import React from 'react'
 import { ChatWindow } from './ChatWindow'
+import { ChatMembersPane } from './ChatMembersPane'
 
 export const ChatRoom = () => {
     return (
-        <ChatWindow/>
+        <section className="chatRoom">
+            <ChatWindow/>
+            <ChatMembersPane/>
+        </section>
     )
 }
