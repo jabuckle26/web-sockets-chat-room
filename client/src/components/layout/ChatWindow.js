@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import io from 'socket.io-client';
-
-const socket = io.connect('http://localhost:4000');
+import React, { useState, useEffect, useContext } from 'react'
+import { GlobalContext } from '../../context/GlobalState';
 
 export const ChatWindow = () => {
-
+    const {socket} = useContext(GlobalContext);
     const [messageText, setMessageText] = useState('');
     const [chatOutput, setChatOutput] = useState([]);
-    const io = window.cloudflare;
 
     const handleSend = (e) => {
         socket.emit('sendMessage', messageText);
@@ -20,9 +17,15 @@ export const ChatWindow = () => {
 
     useEffect(() => {
         socket.on("messageFromServer", (data) => {
-            console.log('Got something');
-            console.log(data);
             setChatOutput([...chatOutput, data]);
+        });
+
+        socket.on('newChatMember', (data) => {
+            setChatOutput([...chatOutput, `${data} has joined the chat lol!`]);
+        });
+
+        socket.on('chatMemberLeft', (data) => {
+            setChatOutput([...chatOutput, `${data} has left the chat, sad times!`]);
         });
     });
 

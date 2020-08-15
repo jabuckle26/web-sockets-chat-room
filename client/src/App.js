@@ -5,6 +5,7 @@ import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import './App.scss';
+import { GlobalProvider } from './context/GlobalState';
 import { ChatRoom } from './components/layout/ChatRoom';
 
 const App = () => (
@@ -18,7 +19,9 @@ const App = () => (
           <Route exact path='/login' component={Login} />
         </Switch>
       </section> */}
-      <ChatRoom></ChatRoom>
+      <GlobalProvider>
+        <ChatRoom></ChatRoom>
+      </GlobalProvider>
     </Fragment>
   </Router>
 );
