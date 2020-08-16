@@ -6,7 +6,7 @@ export const ChatWindow = () => {
     const [messageText, setMessageText] = useState('');
     const [chatOutput, setChatOutput] = useState([]);
 
-    const handleSend = (e) => {
+    const handleSend = () => {
         socket.emit('sendMessage', messageText);
         setMessageText('');
     }

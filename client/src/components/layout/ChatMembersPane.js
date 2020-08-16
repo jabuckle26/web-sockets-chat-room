@@ -16,7 +16,7 @@ export const ChatMembersPane = () => {
             <h3 className="membersPaneTitle">Chat Members</h3>
             <div className="membersContainer">
                 {chatPanelList.map((member) => (
-                    <ul key={member} className="member">{member}</ul>
+                    <ul key={member.name} className="member">{member.name}</ul>
                 ))}
             </div>
         </div>

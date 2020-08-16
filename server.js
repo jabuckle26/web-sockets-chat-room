@@ -2,8 +2,9 @@ const express = require('express');
 const socket = require('socket.io');
 
 const app = express();
-const server = app.listen(4000, () => {
-    console.log('Now listening on port 4000');
+const PORT = process.env.PORT || 4000;
+const server = app.listen(PORT, () => {
+    console.log(`Now listening on port ${PORT}`);
 });
 
 //Here we define the folder to serve to the client
@@ -16,9 +17,11 @@ io.on('connection', (theSocket) => {
     console.log('Connected to socket');
     console.log(theSocket.id);
     
-    chatMembers.push(theSocket.id);
-    io.sockets.emit('updateChatMembers', chatMembers);
-    io.emit('newChatMember', theSocket.id);
+    theSocket.on('userLogin', (newUserName) => {
+        chatMembers.push({id: theSocket.id, name: newUserName});
+        io.sockets.emit('updateChatMembers', chatMembers);
+        io.emit('newChatMember', newUserName);
+    });  
 
     theSocket.on('sendMessage', (dataFromClient) => {
         console.log(dataFromClient);
@@ -29,10 +32,10 @@ io.on('connection', (theSocket) => {
         theSocket.broadcast.emit('typing', dataFromClient);
     });
 
-    theSocket.on('disconnect', (dataFromClient) => {
+    theSocket.on('disconnect', () => {
         console.log('Disconnected');
         console.log(theSocket.id);
-        chatMembers = chatMembers.filter((chatMember) => chatMember !== theSocket.id);
+        chatMembers = chatMembers.filter((chatMember) => chatMember.id !== theSocket.id);
         io.sockets.emit('updateChatMembers', chatMembers);
         io.sockets.emit('chatMemberLeft', theSocket.id);
     });
