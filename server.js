@@ -19,11 +19,6 @@ io.on('connection', (theSocket) => {
     chatMembers.push(theSocket.id);
     io.sockets.emit('updateChatMembers', chatMembers);
     io.emit('newChatMember', theSocket.id);
-    
-    theSocket.on('chat', (dataFromClient) => {
-        console.log(dataFromClient);
-        io.sockets.emit('chat', dataFromClient);
-    });
 
     theSocket.on('sendMessage', (dataFromClient) => {
         console.log(dataFromClient);

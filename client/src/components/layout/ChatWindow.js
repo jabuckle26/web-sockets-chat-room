@@ -17,15 +17,15 @@ export const ChatWindow = () => {
 
     useEffect(() => {
         socket.on("messageFromServer", (data) => {
-            setChatOutput([...chatOutput, data]);
+            setChatOutput([...chatOutput, {message: data, style: 'message'}]);
         });
 
         socket.on('newChatMember', (data) => {
-            setChatOutput([...chatOutput, `${data} has joined the chat lol!`]);
+            setChatOutput([...chatOutput, {message: `${data} has joined the chat lol!`, style: 'notifyUserChange'}]);
         });
 
         socket.on('chatMemberLeft', (data) => {
-            setChatOutput([...chatOutput, `${data} has left the chat, sad times!`]);
+            setChatOutput([...chatOutput, {message: `${data} has left the chat, sad times!`, style: 'notifyUserChange'}]);
         });
     });
 
@@ -33,7 +33,7 @@ export const ChatWindow = () => {
         <div className="chatWindow">
             <div className="chatContainer">
                 <div className="chatTextOutput">{chatOutput.map((message) => (
-                    <p className="message" key={message}>{message}</p>
+                    <p className={message.style} key={message.message}>{message.message}</p>
                 ))}</div>
                 <div className="typingFeedback"></div>
             </div>

@@ -15,8 +15,8 @@ const App = () => (
       {/* <Route exact path="/" component={Landing} />
       <section className="container">
         <Switch>
-          <Route exact path='/register' component={Register} />
-          <Route exact path='/login' component={Login} />
+        <Route exact path='/login' component={Landing} />
+          <Route exact path='/chat' component={ChatWindow} />
         </Switch>
       </section> */}
       <GlobalProvider>

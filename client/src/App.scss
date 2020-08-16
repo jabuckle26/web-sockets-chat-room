@@ -66,6 +66,11 @@ body {
             font-size: 1rem;
             margin: 0.625rem 0;
           }
+
+          p.notifyUserChange {
+            text-align: center;
+            font-style: italic;
+          }
         }
       }
 
@@ -85,6 +90,11 @@ body {
           height:100%;
           background-color: $colour-main-action;
           color: $colour-black-text;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $colour-background;
+          }
         }
       }
     }
@@ -95,8 +105,27 @@ body {
       border: 2px solid $colour-bright-action;
       background-color: $colour-light-background;
       margin-right: 2%;
-    }
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
 
+      h3.membersPaneTitle {
+        margin: 3%;
+      }
+
+      div.membersContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        overflow-y: auto;
+
+        .member {
+          margin: 3%;
+        }
+      }
+    }
   }
 }
 

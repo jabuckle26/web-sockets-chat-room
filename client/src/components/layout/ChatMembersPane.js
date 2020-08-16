@@ -13,9 +13,12 @@ export const ChatMembersPane = () => {
 
     return (
         <div className="membersPane">
-            {chatPanelList.map((member) => (
-                <li>{member}</li>
-            ))}
+            <h3 className="membersPaneTitle">Chat Members</h3>
+            <div className="membersContainer">
+                {chatPanelList.map((member) => (
+                    <ul key={member} className="member">{member}</ul>
+                ))}
+            </div>
         </div>
     )
 }
