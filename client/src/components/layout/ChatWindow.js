@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../context/GlobalState';
 
+const setNotificationToObject = (userName, status) => {
+    return {
+        text: `${userName} has ${status} the chat!`,
+        style: 'notifyUserChange',
+        sender: '',
+    }
+}
+
 export const ChatWindow = () => {
-    const {socket} = useContext(GlobalContext);
+    const { socket, userName } = useContext(GlobalContext);
     const [messageText, setMessageText] = useState('');
     const [chatOutput, setChatOutput] = useState([]);
 
-    const handleSend = (e) => {
-        socket.emit('sendMessage', messageText);
+    const handleSend = () => {
+        socket.emit('sendMessage', { text: messageText, sender: userName, style: 'message' });
         setMessageText('');
     }
 
@@ -17,23 +25,27 @@ export const ChatWindow = () => {
 
     useEffect(() => {
         socket.on("messageFromServer", (data) => {
-            setChatOutput([...chatOutput, {message: data, style: 'message'}]);
+            setChatOutput([...chatOutput, data]);
         });
 
         socket.on('newChatMember', (data) => {
-            setChatOutput([...chatOutput, {message: `${data} has joined the chat lol!`, style: 'notifyUserChange'}]);
+            setChatOutput([...chatOutput, setNotificationToObject(data, 'joined')]);
         });
 
         socket.on('chatMemberLeft', (data) => {
-            setChatOutput([...chatOutput, {message: `${data} has left the chat, sad times!`, style: 'notifyUserChange'}]);
+
+            setChatOutput([...chatOutput, setNotificationToObject(data, 'left')]);
         });
     });
 
     return (
         <div className="chatWindow">
             <div className="chatContainer">
-                <div className="chatTextOutput">{chatOutput.map((message) => (
-                    <p className={message.style} key={message.message}>{message.message}</p>
+                <div className="chatTextOutput">{chatOutput.map((message) => 
+                    (
+                        message.style !== 'notifyUserChange' ?
+                            <p className={message.style} key={message.text}><span className="sender">{`${message.sender}: `}</span>{message.text}</p>
+                            : <p className={message.style} key={message.text}>{message.text}</p>
                 ))}</div>
                 <div className="typingFeedback"></div>
             </div>
