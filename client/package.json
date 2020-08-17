@@ -43,5 +43,5 @@
   "devDependencies": {
     "node-sass": "^4.14.1"
   },
-  "proxy": "https://http://web-chat-socket-io-demo.herokuapp.com/"
+  "proxy": "https://web-chat-socket-io-demo.herokuapp.com/"
 }

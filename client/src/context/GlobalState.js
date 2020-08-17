@@ -5,7 +5,7 @@ import AppReducer from './AppReducer';
 const initialState = {
     chatMembers: [],
     isChatOpen: false,
-    socket: io.connect('http://localhost:4000'),
+    socket: io.connect('https://web-chat-socket-io-demo.herokuapp.com/'),
     userName: '',
 }
 
