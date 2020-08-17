@@ -8,7 +8,7 @@ const server = app.listen(PORT, () => {
 });
 
 //Here we define the folder to serve to the client
-app.use(express.static('public'));
+app.use(express.static('client/build'));
 
 let chatMembers = [];
 
