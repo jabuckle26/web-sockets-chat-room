@@ -7,14 +7,10 @@ export const Landing = () => {
     const [attemptedUserName, setAttemptedUserName] = useState('');
 
     const handleEnterUserName = () => {
-        if (chatMembers.filter((member) => member.name === attemptedUserName).length === 0) {
-            socket.emit('userLogin', attemptedUserName);
-            addMember({id: socket.id, name: attemptedUserName});
-            assignUserName(attemptedUserName);
-            openChatWindow();
-        } else {
-            setIsInvalidUserName(true);
-        }
+        socket.emit('userLogin', attemptedUserName);
+        addMember({id: socket.id, name: attemptedUserName});
+        assignUserName(attemptedUserName);
+        openChatWindow();
     }
 
     const handleTyping = (e) => {

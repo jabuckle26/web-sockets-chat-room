@@ -24,7 +24,6 @@ io.on('connection', (theSocket) => {
     });  
 
     theSocket.on('sendMessage', (dataFromClient) => {
-        console.log(dataFromClient);
         io.sockets.emit('messageFromServer', dataFromClient);
     });
 
@@ -35,8 +34,8 @@ io.on('connection', (theSocket) => {
     theSocket.on('disconnect', () => {
         console.log('Disconnected');
         console.log(theSocket.id);
+        io.sockets.emit('chatMemberLeft', chatMembers.filter((chatMember) => chatMember.id === theSocket.id)[0].name);
         chatMembers = chatMembers.filter((chatMember) => chatMember.id !== theSocket.id);
         io.sockets.emit('updateChatMembers', chatMembers);
-        io.sockets.emit('chatMemberLeft', theSocket.id);
     });
 })
