@@ -20,9 +20,9 @@ export const Landing = () => {
     return (
         <section className='landing'>
             <div className='landingCard'>
-                <h2>Please enter a username:</h2>
-                <div>
-                    <input className='usernameRegistration' value={attemptedUserName} type='text' onChange={(e) => handleTyping(e)} placeholder='Enter a username...' />
+                <h2>Enter a username:</h2>
+                <div className='loginInputContainer'>
+                    <input className='usernameRegistration' value={attemptedUserName} type='text' onChange={(e) => handleTyping(e)} placeholder='Username...' />
                     <button className='enterButton' onClick={() => handleEnterUserName()}>Enter</button>
                 </div>
                 {isInvalidUserName &&

@@ -1,4 +1,6 @@
 /* Global Styles */
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
 :root {
   --primary-color: #17a2b8;
   --dark-color: #343a40;
@@ -11,7 +13,9 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Raleway'
 }
+$break-small: 500px;
 
 $colour-background: #4F6D7A;
 $colour-chatWindow: #C0D6DF;
@@ -35,6 +39,56 @@ nav {
 }
 
 body {
+
+  .landing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .landingCard {
+      background-color: $colour-bright-action;
+      padding: 10%;
+      border: 2px solid $colour-black-text;
+      border-radius: 2%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 30vw;
+
+      @media screen and (max-width: $break-small) {
+        width: 55vw;
+        height: 20vh;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      .loginInputContainer {
+        display: flex;
+
+        margin-top: 5%;
+
+        input {
+          width: 80%;
+        }
+
+        button {
+          background-color: $colour-light-background;
+          color: $colour-black-text;
+          padding: 3%;
+          min-width: 14%;
+
+          cursor: pointer;
+
+          &:hover {
+            background-color: $colour-background;
+          }
+        }
+      }
+    } 
+  }
   section.chatRoom {
     width: 100vw;
     height: 90vh;
@@ -42,6 +96,22 @@ body {
     align-items: center;
     justify-content: center;
     background-color:$colour-chatWindow;
+
+    @media screen and (max-width: $break-small) {
+      flex-direction: column;
+      
+    }
+
+    .pannelVisibilityControl {
+      display: none;
+      @media screen and (max-width: $break-small) {
+        display: flex;
+        background-color: $colour-light-background;
+        color: $colour-black-text;
+        padding: 2%;
+        margin-bottom: 2px;
+      }
+    }
 
     div.chatWindow {
       height: 90%;
@@ -52,6 +122,10 @@ body {
       flex-direction: column;
       justify-content: space-between;
       margin-left: 2%;
+
+      @media screen and (max-width: $break-small) {
+        width: 95%;
+      }
 
       div.chatContainer {
         height: 90%;
@@ -65,6 +139,10 @@ body {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             font-size: 1rem;
             margin: 0.625rem 0;
+
+            @media screen and (max-width: $break-small) {
+              font-size: 1.4rem;
+            }
 
             .sender {
               font-weight: bold;
@@ -113,6 +191,10 @@ body {
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
+
+      @media screen and (max-width: $break-small) {
+        display: none;
+      }
 
       h3.membersPaneTitle {
         margin: 3%;
